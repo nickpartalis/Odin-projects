@@ -1,13 +1,19 @@
+const playerScoreCount = document.querySelector('#player-score');
+const compScoreCount = document.querySelector('#comp-score');
+const result = document.querySelector('#result');
+const main = document.querySelector('main');
+
+const buttons = document.querySelectorAll('#buttons button');
+for (const btn of buttons) {
+    btn.addEventListener('click', () => game(btn.id));
+}
+
+let playerScore = compScore = 0;
+
 function computerPlay() {
+    const choices = ["rock", "paper", "scissors"];
     let compChoice = Math.floor(Math.random() * 3); // 0, 1 or 2
-    switch(compChoice) {
-        case 0:
-            return "rock";
-        case 1:
-            return "paper";
-        case 2:
-            return "scissors";
-    }
+    return choices[compChoice];
 }
 
 function playRound(playerChoice, compChoice) {
@@ -22,27 +28,48 @@ function playRound(playerChoice, compChoice) {
     return "computer";
 }
 
-function game() {
-    let playerScore = compScore = 0;
-    for (let i = 0; i < 5; i++) {
-        let playerChoice = prompt("Rock, paper or scissors? ");
-        let compChoice = computerPlay();
-        let result = playRound(playerChoice, compChoice);
+function game(playerChoice) {
+    if (playerScore >= 5 || compScore >= 5) return;
 
-        if (result == "tie") console.log("It's a tie!");
-        else if (result == "player") {
-            ++playerScore;
-            console.log(`You win this round, ${playerChoice} beats ${compChoice}.`);
-        }
-        else {
-            ++compScore;
-            console.log(`You lose this round, ${compChoice} beats ${playerChoice}.`);
-        }
+    let compChoice = computerPlay();
+    let round = playRound(playerChoice, compChoice);
+
+    if (round == "tie") result.textContent = "It's a tie!";
+    else if (round == "player") {
+        playerScore++;
+        playerScoreCount.textContent = playerScore;
+        result.textContent = `You win this round, ${playerChoice} beats ${compChoice}.`;
     }
-    
-    if (playerScore > compScore) console.log(`Congratulations, you won ${playerScore}-${compScore}!`);
-    else if (compScore > playerScore) console.log(`Game over. You lost ${playerScore}-${compScore}.`);
-    else console.log (`Game is a draw, ${playerScore}-${compScore}.`);
+    else {
+        compScore++;
+        compScoreCount.textContent = compScore;
+        result.textContent = `You lose this round, ${compChoice} beats ${playerChoice}.`;
+    }
+
+    if (playerScore == 5 || compScore == 5) announceWinner();
 }
 
-game()
+function announceWinner() {
+    const displayWinner = document.createElement('div');
+    displayWinner.setAttribute('id', "winner");
+
+    const winner = document.createElement('p');
+    let text = (playerScore > compScore ? `Congratulations! You won ${playerScore}-${compScore}.`
+                                        : `Game over. You lost ${playerScore}-${compScore}.`);
+    winner.textContent = text;
+    displayWinner.appendChild(winner);
+    const playAgain = document.createElement('button');
+    playAgain.innerHTML = "Play again";
+    playAgain.addEventListener('click', () => restartGame())
+    displayWinner.appendChild(playAgain);
+
+    main.appendChild(displayWinner);
+}
+
+function restartGame() {
+    playerScore = compScore = 0;
+    playerScoreCount.textContent = playerScore;
+    compScoreCount.textContent = compScore;
+    const displayWinner = document.querySelector('#winner');
+    main.removeChild(displayWinner);
+}
