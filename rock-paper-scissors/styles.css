@@ -1,0 +1,112 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+  background-color: #DCD7C9;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h2, h3 {
+  color: #3F4E4F;
+}
+
+header {
+  color: rgb(220, 220, 220);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2C3639;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#score {
+  text-align: center;
+  display: flex;
+  gap: 20vw;
+  padding-top: 30px;
+
+}
+
+#player-img {
+  display: block;
+  height: 200px;
+  width: 200px;
+  transform: rotate(-30deg);
+}
+
+#comp-img {
+  display: block;
+  height: 200px;
+  width: 200px;
+  transform: rotate(30deg) scaleX(-1);
+}
+
+#result {
+    height: 1em;
+}
+
+#buttons {
+    /* display: flex;
+    gap: 8px; */
+    padding: 30px;
+}
+
+#buttons button img {
+    width: 120px;
+    border-radius: 50%;
+}
+
+#winner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#winner button {
+  background-color: #2ea44f;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 1.1em;
+  padding: 8px 24px;
+}
+
+footer {
+  background-color: #3F4E4F;
+  color: lightgrey;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3em;
+  padding: 12px;
+}
+
+footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.win {
+  color: green;
+}
+
+.lose {
+  color: red;
+}
+

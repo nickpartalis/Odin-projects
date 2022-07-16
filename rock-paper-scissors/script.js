@@ -2,6 +2,10 @@ const playerScoreCount = document.querySelector('#player-score');
 const compScoreCount = document.querySelector('#comp-score');
 const result = document.querySelector('#result');
 const main = document.querySelector('main');
+const playerImg = document.querySelector('#player-img');
+const compImg = document.querySelector('#comp-img');
+const playerText = document.querySelector('#player h3');
+const compText = document.querySelector('#comp h3');
 
 const buttons = document.querySelectorAll('#buttons button');
 for (const btn of buttons) {
@@ -34,18 +38,27 @@ function game(playerChoice) {
     let compChoice = computerPlay();
     let round = playRound(playerChoice, compChoice);
 
-    if (round == "tie") result.textContent = "It's a tie!";
+    playerImg.style.backgroundImage = `url(assets/${playerChoice}.png)`;
+    compImg.style.backgroundImage = `url(assets/${compChoice}.png)`;
+
+    if (round == "tie") {
+        result.textContent = "It's a tie!";
+        result.className = "";
+    }
     else if (round == "player") {
         playerScore++;
         playerScoreCount.textContent = playerScore;
         result.textContent = `You win this round, ${playerChoice} beats ${compChoice}.`;
+        result.className = "win";
     }
     else {
         compScore++;
         compScoreCount.textContent = compScore;
         result.textContent = `You lose this round, ${compChoice} beats ${playerChoice}.`;
+        result.className = "lose";
     }
 
+    updateScoreColor()
     if (playerScore == 5 || compScore == 5) announceWinner();
 }
 
@@ -53,9 +66,16 @@ function announceWinner() {
     const displayWinner = document.createElement('div');
     displayWinner.setAttribute('id', "winner");
 
-    const winner = document.createElement('p');
-    let text = (playerScore > compScore ? `Congratulations! You won ${playerScore}-${compScore}.`
-                                        : `Game over. You lost ${playerScore}-${compScore}.`);
+    const winner = document.createElement('h3');
+    let text;
+    if (playerScore > compScore) {
+        text = `Congratulations! You won ${playerScore}-${compScore}.`
+        winner.className = "win";
+    }
+    else {
+        text = `Game over. You lost ${playerScore}-${compScore}.`;
+        winner.className = "lose";
+    }
     winner.textContent = text;
     displayWinner.appendChild(winner);
     const playAgain = document.createElement('button');
@@ -70,6 +90,23 @@ function restartGame() {
     playerScore = compScore = 0;
     playerScoreCount.textContent = playerScore;
     compScoreCount.textContent = compScore;
-    const displayWinner = document.querySelector('#winner');
+    result.textContent = "Make your choice:";
+    result.className = "";
+    playerImg.style.backgroundImage = "none";
+    compImg.style.backgroundImage = "none";
+    const displayWinner = document.querySelector("#winner");
     main.removeChild(displayWinner);
+    updateScoreColor();
+}
+
+function updateScoreColor() {
+    if (playerScore > compScore) {
+        playerText.className = "win";
+        compText.className = "lose";
+    }
+    else if (playerScore < compScore) {
+        playerText.className = "lose";
+        compText.className = "win";
+    }
+    else playerText.className = compText.className = "";
 }
