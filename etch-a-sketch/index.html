@@ -5,27 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/7d77d1b65d.js" crossorigin="anonymous"></script>
     <title>Etch-a-Sketch</title>
 </head>
 <body>
-    <header><h1>Etch A Sketch</h1></header>
-    <main>
-        <div id="board">
-            <div id="grid-container"></div>
-            <div id="options">
-                <input type="range" id="grid-slider"  min="16" max="100" value="32">
-                <div id="grid-size">32 x 32</div>
-                <button id="color">Color</button>
-                <button id="random">Random</button>
-                <button id="eraser">Eraser</button>
-                <button id="clear">Clear</button>
-                <input type="color" id="color-picker" value="#000000">
+    <div id="board">
+        <div id="left">
+            <p>Grid size</p> 
+            <div id="size-knob">
+                <input type="range" id="grid-slider"  min="4" max="100" value="32">
+                <div id="grid-size">32 x 32</div> 
             </div>
         </div>
-        
-    </main>
-    <footer>Code by Nick Partalis <a href="https://github.com/nickpartalis"><i class="fa-brands fa-github"></i></a></footer>
+        <div id="center">
+            <div id="title"><h1>Etch-a-Sketch</h1></div>
+            <div id="grid-container"></div>
+            <div id="buttons">
+                <p id="color" class="btn active">Color</p>
+                <p id="random" class="btn">Random</p>
+                <p id="eraser" class="btn">Eraser</p>
+                <p id="clear" class="btn">Clear</p>
+            </div>
+        </div>
+        <div id="right">
+            <p>Color</p>
+            <div id="color-knob">
+                <div>
+                    <input type="color" id="color-picker" value="#000000">
+                </div>
+            </div>    
+        </div>
+
+    </div>
+    <footer>
+        Code by Nick Partalis 
+        <a href="https://github.com/nickpartalis"><i class="fa-brands fa-github"></i></a>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>

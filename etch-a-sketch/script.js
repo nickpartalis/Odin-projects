@@ -26,7 +26,7 @@ clearBtn.addEventListener("click", () => createNewGrid(gridSlider.value));
 const modes = ["color", "random", "eraser"]
 for (const mode of modes) {
     const btn = document.getElementById(mode);
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("mousedown", (e) => {
         penMode = mode;
         const activeMode = document.querySelector(".active")
         if (activeMode) activeMode.classList.remove("active");
