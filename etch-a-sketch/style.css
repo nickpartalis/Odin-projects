@@ -30,6 +30,7 @@ body {
 #title {
     font-family: 'Lobster', cursive;
     font-size: 1.8em;
+    margin: -10px 0;
     color: orange;
 }
 
@@ -150,12 +151,13 @@ body {
 }
 
 footer {
-    background-color: rgb(50, 50, 50, 0.5);
+    background-color: rgb(50 50 50 / 50%);
     color: lightgrey;
+    font-family: 'Courier New', Courier, monospace;
     width: 100%;
     margin-top: auto;
     text-align: center;
-    padding: 10px 0;
+    padding: 8px 0;
   }
   
   footer a {
@@ -164,9 +166,10 @@ footer {
   }
 
 .fa-brands {
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 
 .fa-brands:hover {
     transform: scale(1.2);
+    filter: brightness(1.2);
   }
