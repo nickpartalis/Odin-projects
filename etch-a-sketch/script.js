@@ -11,7 +11,10 @@ let penMode = "color";
 let mouseIsDown = false;
 
 // Event listeners
-grid.addEventListener("mousedown", (e) => mouseIsDown = true);
+grid.addEventListener("mousedown", (e) => {
+    e.preventDefault();
+    mouseIsDown = true;
+});
 grid.addEventListener("mouseup", () => mouseIsDown = false);
 
 gridSlider.addEventListener("change", (e) => createNewGrid(e.target.value));
@@ -41,7 +44,6 @@ function createNewGrid(size) {
     for (let i=0; i<size**2; i++) {
         let item = document.createElement("div");
         item.className = "grid-item";
-        item.setAttribute('draggable', 'false');
         item.addEventListener("mouseover", () => {
             if (mouseIsDown) colorItem(item);
         });
@@ -50,17 +52,17 @@ function createNewGrid(size) {
     }
 }
 
+function colorItem(item) {
+    if (penMode == "color") item.style.backgroundColor = penColor;
+    else if (penMode == "random") item.style.backgroundColor = getRandomColor();
+    else if (penMode == "eraser") item.style.backgroundColor = DEFAULT_GRID_COLOR;
+}
+
 function getRandomColor() {
     const r = Math.floor(Math.random() * 255);
     const g = Math.floor(Math.random() * 255);
     const b = Math.floor(Math.random() * 255);
     return `rgb(${r}, ${g}, ${b})`;
-}
-
-function colorItem(item) {
-    if (penMode == "color") item.style.backgroundColor = penColor;
-    else if (penMode == "random") item.style.backgroundColor = getRandomColor();
-    else if (penMode == "eraser") item.style.backgroundColor = DEFAULT_GRID_COLOR;
 }
 
 window.onload = () => {
