@@ -28,7 +28,7 @@ header {
     padding: 1em 12%;
 }
 
-.navbar {
+nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -39,12 +39,21 @@ header {
     color: #f9faf8;
 }
 
-.navbar ul {
+nav ul {
     display: flex;
     gap: 24px;
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+
+nav a {
+    color: inherit;
+    text-decoration: none;
+}
+
+nav ul a:hover {
+    filter: brightness(0.9);
 }
 
 .hero {
@@ -159,4 +168,19 @@ footer {
     justify-content: center;
     align-items: center;
     padding: 32px;
+}
+
+footer a {
+    margin: 0 0.5em;
+    color: inherit;
+    text-decoration: none;
+}
+
+.fa-brands {
+    font-size: 1.4em;
+}
+
+.fa-brands:hover {
+    transform: scale(1.2);
+    filter: brightness(1.2);
 }
